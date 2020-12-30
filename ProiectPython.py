@@ -9,9 +9,11 @@ buttons2 = []
 exists2 = []
 buttons3 = []
 exists3 = []
-colors = [["red", 14], ["yellow", 14], ["blue", 14], ["green", 12], ["orange", 12], ["brown", 12], ["purple", 12],
-          ["pink", 12], ["gray", 12], ["cyan", 12]]
-positions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+colors = [["navy", 6], ["cyan", 6], ["khaki", 6], ["gold", 6], ["gray20", 6], ["red", 6], ["purple", 6],
+          ["seashell4", 6], ["gray60", 6], ["blue2", 6], ["cyan4", 6], ["SeaGreen1", 6], ["green4", 6],
+          ["OliveDrab1", 6], ["yellow2", 6], ["goldenrod2", 6], ["IndianRed1", 6], ["tan4", 6], ["firebrick4", 6],
+          ["DeepPink2", 6], ["MediumPurple3", 6]]
+positions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 
 def playable():
@@ -113,63 +115,45 @@ def make_buttons_state_normal():
 def update_button_state_by_neighbours():
     # nivelul 1
     for i in range(0, 9):
-        for j in range(0, 9):
+        for j in range(1, 8):
             if exists1[i][j] == 1:
-                if (i == 0 or i == 8) and j != 0 and j != 8:
+                if i == 0 or i == 8:
                     if exists1[i][j-1] == 1 and exists1[i][j+1] == 1:
                         buttons1[i][j].config(state="disabled")
-                elif (j == 0 or j == 8) and i != 0 and i != 8:
-                    if exists1[i-1][j] == 1 and exists1[i+1][j] == 1:
-                        buttons1[i][j].config(state="disabled")
                 else:
-                    if (i != 0 and j != 0) and (i != 0 and j != 8) and (i != 8 and j != 0) and (i != 8 and j != 8):
-                        if nr_of_neighbours(1, i, j) > 2:
+                    if nr_of_neighbours(1, i, j) == 4:
+                        buttons1[i][j].config(state="disabled")
+                    if nr_of_neighbours(1, i, j) < 4:
+                        if exists1[i][j-1] == 1 and exists1[i][j+1] == 1:
                             buttons1[i][j].config(state="disabled")
-                        if nr_of_neighbours(1, i, j) == 2:
-                            if exists1[i-1][j] == 1 and exists1[i+1][j] == 1:
-                                buttons1[i][j].config(state="disabled")
-                            if exists1[i][j-1] == 1 and exists1[i][j+1] == 1:
-                                buttons1[i][j].config(state="disabled")
 
     # nivelul 2
     for i in range(0, 6):
-        for j in range(0, 6):
+        for j in range(1, 5):
             if exists2[i][j] == 1:
-                if (i == 0 or i == 5) and j != 0 and j != 5:
-                    if exists2[i][j-1] == 1 and exists2[i][j+1] == 1:
-                        buttons2[i][j].config(state="disabled")
-                elif (j == 0 or j == 5) and i != 0 and i != 5:
-                    if exists2[i-1][j] == 1 and exists2[i+1][j] == 1:
+                if i == 0 or i == 5:
+                    if exists2[i][j - 1] == 1 and exists2[i][j + 1] == 1:
                         buttons2[i][j].config(state="disabled")
                 else:
-                    if (i != 0 and j != 0) and (i != 0 and j != 5) and (i != 5 and j != 0) and (i != 5 and j != 5):
-                        if nr_of_neighbours(2, i, j) > 2:
+                    if nr_of_neighbours(2, i, j) == 4:
+                        buttons2[i][j].config(state="disabled")
+                    if nr_of_neighbours(2, i, j) < 4:
+                        if exists2[i][j - 1] == 1 and exists2[i][j + 1] == 1:
                             buttons2[i][j].config(state="disabled")
-                        if nr_of_neighbours(2, i, j) == 2:
-                            if exists2[i-1][j] == 1 and exists2[i+1][j] == 1:
-                                buttons2[i][j].config(state="disabled")
-                            if exists2[i][j-1] == 1 and exists2[i][j+1] == 1:
-                                buttons2[i][j].config(state="disabled")
 
     # nivelul 3
     for i in range(0, 3):
-        for j in range(0, 3):
+        for j in range(1, 2):
             if exists3[i][j] == 1:
-                if (i == 0 or i == 2) and j != 0 and j != 2:
-                    if exists3[i][j-1] == 1 and exists3[i][j+1] == 1:
-                        buttons3[i][j].config(state="disabled")
-                elif (j == 0 or j == 2) and i != 0 and i != 2:
-                    if exists3[i-1][j] == 1 and exists3[i+1][j] == 1:
+                if i == 0 or i == 2:
+                    if exists3[i][j - 1] == 1 and exists3[i][j + 1] == 1:
                         buttons3[i][j].config(state="disabled")
                 else:
-                    if (i != 0 and j != 0) and (i != 0 and j != 2) and (i != 2 and j != 0) and (i != 2 and j != 2):
-                        if nr_of_neighbours(3, i, j) > 2:
+                    if nr_of_neighbours(3, i, j) == 4:
+                        buttons3[i][j].config(state="disabled")
+                    if nr_of_neighbours(3, i, j) < 4:
+                        if exists3[i][j - 1] == 1 and exists3[i][j + 1] == 1:
                             buttons3[i][j].config(state="disabled")
-                        if nr_of_neighbours(3, i, j) == 2:
-                            if exists3[i-1][j] == 1 and exists3[i+1][j] == 1:
-                                buttons3[i][j].config(state="disabled")
-                            if exists3[i][j-1] == 1 and exists1[i][j+1] == 1:
-                                buttons3[i][j].config(state="disabled")
 
 
 def update_button_state_by_level():
@@ -309,10 +293,9 @@ def create_map():
         buttons1.append(buttonsx)
         pozy = pozy + 85
         pozx = 0
-    buttons1[0][0].config(state="normal")
-    buttons1[0][8].config(state="normal")
-    buttons1[8][0].config(state="normal")
-    buttons1[8][8].config(state="normal")
+    for i in range(0, 9):
+        buttons1[i][0].config(state="normal")
+        buttons1[i][8].config(state="normal")
 
     # nivelul 2
 
@@ -339,10 +322,9 @@ def create_map():
         buttons2.append(buttonsx)
         pozy = pozy + 85
         pozx = 120
-    buttons2[0][0].config(state="normal")
-    buttons2[0][5].config(state="normal")
-    buttons2[5][0].config(state="normal")
-    buttons2[5][5].config(state="normal")
+    for i in range(0, 6):
+        buttons2[i][0].config(state="normal")
+        buttons2[i][5].config(state="normal")
 
     # nivelul 3
 
@@ -369,10 +351,9 @@ def create_map():
         buttons3.append(buttonsx)
         pozy = pozy + 85
         pozx = 240
-    buttons3[0][0].config(state="normal")
-    buttons3[0][2].config(state="normal")
-    buttons3[2][0].config(state="normal")
-    buttons3[2][2].config(state="normal")
+    for i in range(0, 3):
+        buttons3[i][0].config(state="normal")
+        buttons3[i][2].config(state="normal")
 
 
 top = tk.Tk()
