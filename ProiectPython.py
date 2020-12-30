@@ -9,9 +9,9 @@ buttons2 = []
 exists2 = []
 buttons3 = []
 exists3 = []
-colors = [["red", 16], ["yellow", 16], ["blue", 16], ["green", 16], ["orange", 16], ["brown", 16], ["purple", 16],
-          ["pink", 14]]
-positions = [0, 1, 2, 3, 4, 5, 6, 7]
+colors = [["red", 14], ["yellow", 14], ["blue", 14], ["green", 12], ["orange", 12], ["brown", 12], ["purple", 12],
+          ["pink", 12], ["gray", 12], ["cyan", 12]]
+positions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def playable():
