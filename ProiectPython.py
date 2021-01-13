@@ -17,6 +17,13 @@ positions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1
 
 
 def playable():
+    """
+    Every time a modification was made on the table game, this function will be called to verify if the game is still
+    playable or not. The function will check every card of the game, level by level to see if there is a pair that
+    could be selected.
+    :return: 1 when the game is still playable(there are selectable pairs)
+             0 when there are no more pairs to be selected. In this case player lose.
+    """
     # nivelul 1
     for i in range(0, 9):
         for j in range(0, 9):
@@ -71,6 +78,14 @@ def playable():
 
 
 def nr_of_neighbours(h, x, y):
+    """
+    This function will help to find more easily if a piece is or isn't selectable. This function count the number of the
+    neighbours up, down, left and right for the piece which is at the level 'h', line 'x' and column 'y'
+    :param h: On which level the piece is
+    :param x: On which line the piece is
+    :param y: On which column the piece is
+    :return: cnt which represents the number of neighbours
+    """
     cnt = 0
     if h == 1:
         if exists1[x][y-1] == 1:
@@ -101,7 +116,12 @@ def nr_of_neighbours(h, x, y):
             cnt = cnt + 1
     return cnt
 
+
 def make_buttons_state_normal():
+    """
+    This procedure make every button state of the game to be normal.
+    :return:none
+    """
     for i in range(0, 9):
         for j in range(0, 9):
             buttons1[i][j].config(state="normal")
@@ -112,7 +132,13 @@ def make_buttons_state_normal():
         for j in range(0, 3):
             buttons3[i][j].config(state="normal")
 
+
 def update_button_state_by_neighbours():
+    """
+    This procedure will make every button's state disabled if the piece of the game that meet the button has neighbours
+    on both left and right side in the same time.
+    :return: none
+    """
     # nivelul 1
     for i in range(0, 9):
         for j in range(1, 8):
@@ -157,6 +183,10 @@ def update_button_state_by_neighbours():
 
 
 def update_button_state_by_level():
+    """
+    This procedure will make every button that has another button on them to be disabled.
+    :return: none
+    """
     # nivelul 3
     to_disable = []
     for i in range(0, 3):
@@ -183,15 +213,36 @@ def update_button_state_by_level():
 
 
 def update_button_state():
+    """
+    This procedure will verify if a button should be disabled or not.
+    :return: none
+    """
     update_button_state_by_level()
     update_button_state_by_neighbours()
+
 
 nr_of_clicks = 0
 prec_button_color = "black"
 prec_button_x = 0
 prec_button_y = 0
 prec_button_h = 0
+
+
 def comand_for_button(actual_button_color, actual_button_x, actual_button_y, actual_button_h):
+    """
+    If there are no buttons selected, this procedure will make the border of the button thicker to be more
+    visible, will save it's colour and it's coordinates and will wait for another button to be pressed.
+    If there is a pressed button, this procedure will verify if the colours of the actual button and the last button
+    pressed is the same or not to see if those buttons can be deleted from the table.
+    If two buttons are deleted, this procedure will also verify if the game is still playable, calling the function
+    'playable' to see if the game could continue or not; and will verify if the 'nr_of_pieces' variable is 0, in this
+    case the player win.
+    :param actual_button_color: the pressed button color
+    :param actual_button_x: the pressed button line
+    :param actual_button_y: the pressed button column
+    :param actual_button_h: the pressed button level
+    :return: none
+    """
     global nr_of_clicks, prec_button_color, prec_button_h, prec_button_h, prec_button_x, prec_button_y, nr_of_pieces
 
     if nr_of_clicks == 0:
@@ -265,9 +316,13 @@ def comand_for_button(actual_button_color, actual_button_x, actual_button_y, act
 
 
 def create_map():
+    """
+    This procedure will generate the map, and make the game playable.
+    :return: none
+    """
     button_height = 5
     button_width = 10
-    top.geometry("760x790")
+    top.geometry("720x790")
 
     # nivelul 1
     pozx = 0
